@@ -1,21 +1,7 @@
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_chatapp/services/auth/auth_service.dart';
 import 'package:my_chatapp/components/my_button.dart';
 import 'package:my_chatapp/components/my_textfield.dart';
-
-// Future<void> testLogin() async {
-//   try {
-//     await FirebaseAuth.instance.signInWithEmailAndPassword(
-//       email: "testuser@gmail.com",
-//       password: "12345678",
-//     );
-
-//     print("Login successful");
-//   } catch (e) {
-//     print(e);
-//   }
-// }
 
 class LoginPage extends StatelessWidget {
   final emailController = TextEditingController();
@@ -96,7 +82,7 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Not a member?",
+                  "Not a member? ",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                   ),

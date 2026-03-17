@@ -10,7 +10,7 @@ class UserAuth extends StatefulWidget {
 }
 
 class _UserAuthState extends State<UserAuth> {
-  bool isLoggedIn = false;
+  bool isLoggedIn = true;
   void togglePages() {
     setState(() {
       isLoggedIn = !isLoggedIn;

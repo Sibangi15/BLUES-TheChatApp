@@ -1,22 +1,7 @@
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_chatapp/components/my_button.dart';
 import 'package:my_chatapp/components/my_textfield.dart';
 import 'package:my_chatapp/services/auth/auth_service.dart';
-
-// Future<void> testSignup() async {
-//   try {
-//     final userCredential = await FirebaseAuth.instance
-//         .createUserWithEmailAndPassword(
-//           email: "testuser@gmail.com",
-//           password: "12345678",
-//         );
-
-//     print("User created: ${userCredential.user?.email}");
-//   } catch (e) {
-//     print(e);
-//   }
-// }
 
 class RegisterPage extends StatelessWidget {
   final _emailController = TextEditingController();
@@ -113,7 +98,7 @@ class RegisterPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Already have an account?",
+                  "Already have an account? ",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                   ),

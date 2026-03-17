@@ -5,9 +5,9 @@ import 'package:my_chatapp/services/auth/auth_service.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
-  void logout() {
+  void logout(BuildContext context) async {
     final authService = AuthService();
-    authService.signOut();
+    await authService.signOut();
   }
 
   @override
@@ -63,7 +63,7 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               leading: const Icon(Icons.logout),
               title: const Text("L O G O U T"),
-              onTap: logout,
+              onTap: () => logout(context),
             ),
           ),
         ],
