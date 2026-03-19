@@ -4,6 +4,8 @@ import 'package:my_chatapp/components/chat_bubble.dart';
 import 'package:my_chatapp/components/my_textfield.dart';
 import 'package:my_chatapp/services/auth/auth_service.dart';
 import 'package:my_chatapp/services/chat/chat_services.dart';
+//import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class ChatPage extends StatefulWidget {
   final String recieverEmail;
@@ -24,6 +26,53 @@ class _ChatPageState extends State<ChatPage> {
 
   //for textified focus
   FocusNode focusNode = FocusNode();
+
+  //pick image from gallery
+  Future<XFile?> pickImage() async {
+    return await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    );
+
+    // if (pickedFile != null) {
+    //   return File(pickedFile.path);
+    // }
+    // return null;
+  }
+
+  // void sendImageMessage() async {
+  //   File? image = await pickImage();
+
+  //   if (image == null) return;
+
+  //   String imageUrl = await _chatService.uploadImage(image);
+
+  //   await _chatService.sendImageMessage(widget.recieverID, imageUrl);
+
+  //   scrollDown();
+  // }
+
+  void sendImageMessage() async {
+    final image = await pickImage();
+    if (image == null) return;
+
+    final bytes = await image.readAsBytes();
+
+    String imageUrl = await _chatService.uploadImageWeb(bytes);
+
+    await _chatService.sendImageMessage(widget.recieverID, imageUrl);
+
+    scrollDown();
+  }
+
+  String getChatRoomId() {
+    String currentUserID = _authService.getCurrentUser()!.uid;
+
+    List<String> ids = [currentUserID, widget.recieverID];
+    ids.sort();
+
+    return ids.join('_');
+  }
 
   @override
   void initState() {
@@ -73,7 +122,10 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.recieverEmail), backgroundColor: Colors.indigo.shade400,),
+      appBar: AppBar(
+        title: Text(widget.recieverEmail),
+        backgroundColor: Colors.indigo.shade400,
+      ),
       body: Column(
         children: [
           Expanded(child: _buildMessageList()),
@@ -123,7 +175,15 @@ class _ChatPageState extends State<ChatPage> {
             ? CrossAxisAlignment.end
             : CrossAxisAlignment.start,
         children: [
-          ChatBubble(message: data["message"], isCurrentUser: isCurrentUser),
+          ChatBubble(
+            message: data["message"] ?? "",
+            imageUrl: data["imageUrl"] ?? "",
+            isCurrentUser: isCurrentUser,
+            onDelete: () {
+              String chatRoomId = getChatRoomId();
+              _chatService.deleteMessage(chatRoomId, doc.id);
+            },
+          ),
         ],
       ),
     );
@@ -135,6 +195,10 @@ class _ChatPageState extends State<ChatPage> {
       padding: const EdgeInsets.only(bottom: 50.0),
       child: Row(
         children: [
+          IconButton(
+            icon: const Icon(Icons.image),
+            onPressed: sendImageMessage,
+          ),
           Expanded(
             child: MyTextField(
               controller: _messageController,

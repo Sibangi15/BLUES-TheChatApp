@@ -1,16 +1,82 @@
-# my_chatapp
+# 💬 Flutter Chat App
 
-A new Flutter project.
+A modern real-time chat application built using Flutter and Firebase, featuring seamless messaging, media sharing, and a clean UI with theme customization.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+##  Live Demo
+🔗 https://your-deployed-link-here.com
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+##  Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-  **Real-time Messaging**  
+  Instantly send and receive messages powered by Firebase Firestore.
+
+-  **Image Sharing**  
+  Upload and send images directly from your device.
+
+-  **Delete Messages**  
+  Remove messages with a clean and responsive UI.
+
+-  **Light & Dark Mode**  
+  Toggle between light and dark themes for a better user experience.
+
+-  **Authentication**  
+  Secure login and registration using Firebase Auth.
+
+-  **Smooth UI/UX**  
+  Clean chat interface with auto-scroll and responsive design.
+
+---
+
+##  Tech Stack
+
+- **Frontend:** Flutter  
+- **Backend:** Firebase  
+- **Database:** Cloud Firestore  
+- **Storage:** Firebase Storage  
+- **Authentication:** Firebase Auth  
+
+---
+
+##  Screenshots
+
+### Home Screen
+![Image Upload](assets/screenshots/home.png)
+
+###  Chat Screen
+![Chat Screen](assets/screenshots/chat.png)
+
+###  Drawer
+![Dark Mode](assets/screenshots/drawer.png)
+
+### Chat on  Big Screen
+![Image Upload](assets/screenshots/chat_iPad.png)
+
+---
+
+##  Future Improvements
+
+-  Message read receipts (seen/delivered)
+-  File sharing (PDF, docs)
+-  Push notifications
+-  Group chats
+
+---
+
+##  About Me
+
+Hi, I’m **Sibangi Chakraborty** 
+A passionate developer building real-world full-stack applications.
+
+ Portfolio: https://sibangi-portfolio-website.netlify.app/
+
+---
+
+## ⭐ Show your support
+
+If you like this project, give it a ⭐ on GitHub!
+
+---

@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_chatapp/models/message.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+//import 'dart:io';
+import 'dart:typed_data';
 
 class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -59,5 +62,69 @@ class ChatService {
         .collection('Messages')
         .orderBy('timestamp', descending: false)
         .snapshots();
+  }
+
+  // upload image
+  // Future<String> uploadImage(File file) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+  //   final ref = FirebaseStorage.instance
+  //       .ref()
+  //       .child("chat_images")
+  //       .child(fileName);
+
+  //   await ref.putFile(file);
+
+  //   return await ref.getDownloadURL();
+  // }
+
+  Future<String> uploadImageWeb(Uint8List bytes) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+      final ref = FirebaseStorage.instance.ref().child("chat_images/$fileName");
+
+      await ref.putData(bytes);
+
+      return await ref.getDownloadURL();
+    } catch (e) {
+      print("UPLOAD ERROR: $e");
+      rethrow;
+    }
+  }
+
+  //send image message
+  Future<void> sendImageMessage(String receiverId, String imageUrl) async {
+    final String currentUserID = _auth.currentUser!.uid;
+    final String currentUserEmail = _auth.currentUser!.email!;
+    final Timestamp timestamp = Timestamp.now();
+
+    // construct chatroom id
+    List<String> ids = [currentUserID, receiverId];
+    ids.sort();
+    String chatRoomId = ids.join('_');
+
+    await _firestore
+        .collection('ChatRooms')
+        .doc(chatRoomId)
+        .collection('Messages')
+        .add({
+          "senderId": currentUserID,
+          "senderEmail": currentUserEmail,
+          "recieverID": receiverId,
+          "message": "",
+          "imageUrl": imageUrl,
+          "timestamp": timestamp,
+        });
+  }
+
+  //delete message
+  Future<void> deleteMessage(String chatRoomId, String messageId) async {
+    await _firestore
+        .collection('ChatRooms')
+        .doc(chatRoomId)
+        .collection('Messages')
+        .doc(messageId)
+        .delete();
   }
 }
