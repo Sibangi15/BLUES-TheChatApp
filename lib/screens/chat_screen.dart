@@ -4,7 +4,6 @@ import 'package:my_chatapp/components/chat_bubble.dart';
 import 'package:my_chatapp/components/my_textfield.dart';
 import 'package:my_chatapp/services/auth/auth_service.dart';
 import 'package:my_chatapp/services/chat/chat_services.dart';
-//import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class ChatPage extends StatefulWidget {
@@ -33,44 +32,21 @@ class _ChatPageState extends State<ChatPage> {
       source: ImageSource.gallery,
       imageQuality: 50,
     );
-
-    // if (pickedFile != null) {
-    //   return File(pickedFile.path);
-    // }
-    // return null;
   }
-
-  // void sendImageMessage() async {
-  //   File? image = await pickImage();
-
-  //   if (image == null) return;
-
-  //   String imageUrl = await _chatService.uploadImage(image);
-
-  //   await _chatService.sendImageMessage(widget.recieverID, imageUrl);
-
-  //   scrollDown();
-  // }
 
   void sendImageMessage() async {
     final image = await pickImage();
     if (image == null) return;
-
     final bytes = await image.readAsBytes();
-
     String imageUrl = await _chatService.uploadImageWeb(bytes);
-
     await _chatService.sendImageMessage(widget.recieverID, imageUrl);
-
     scrollDown();
   }
 
   String getChatRoomId() {
     String currentUserID = _authService.getCurrentUser()!.uid;
-
     List<String> ids = [currentUserID, widget.recieverID];
     ids.sort();
-
     return ids.join('_');
   }
 

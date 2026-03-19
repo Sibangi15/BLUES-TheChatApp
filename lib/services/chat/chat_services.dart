@@ -65,19 +65,6 @@ class ChatService {
   }
 
   // upload image
-  // Future<String> uploadImage(File file) async {
-  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-
-  //   final ref = FirebaseStorage.instance
-  //       .ref()
-  //       .child("chat_images")
-  //       .child(fileName);
-
-  //   await ref.putFile(file);
-
-  //   return await ref.getDownloadURL();
-  // }
-
   Future<String> uploadImageWeb(Uint8List bytes) async {
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
