@@ -1,4 +1,4 @@
-# 💬 Flutter Chat App
+# 💬 BLUES - Flutter Chat App
 
 A modern real-time chat application built using Flutter and Firebase, featuring seamless messaging, media sharing, and a clean UI with theme customization.
 
@@ -43,17 +43,11 @@ A modern real-time chat application built using Flutter and Firebase, featuring 
 
 ##  Screenshots
 
-### Home Screen
-![Image Upload](assets/screenshots/home.png)
-
-###  Chat Screen
-![Chat Screen](assets/screenshots/chat.png)
-
-###  Drawer
-![Dark Mode](assets/screenshots/drawer.png)
-
-### Chat on  Big Screen
-![Image Upload](assets/screenshots/chat_iPad.png)
+<p align="center">
+  <img src="assets/screenshots/home.png" width="200"/>
+  <img src="assets/screenshots/drawer.png" width="200"/>
+  <img src="assets/screenshots/chat.png" width="200"/>
+</p>
 
 ---
 
