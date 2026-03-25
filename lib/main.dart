@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'BLUES',
       debugShowCheckedModeBanner: false,
       home: AuthGate(),
       theme: Provider.of<ThemeProvider>(context).themeData,
